@@ -1,0 +1,382 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		23CD1C5C6DB8F8666A6510D8 /* ExportSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EC5FC44D8DD88D65283EFB /* ExportSection.swift */; };
+		2EAC42D6A247073C37B28621 /* CSSInputSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA26D3FECAD6922B5A69EA1 /* CSSInputSection.swift */; };
+		316DF915D6A07CAE1CF196D4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2EA5410E6751792435A5A0 /* ContentView.swift */; };
+		3CBB6001C09244DDE28CD18D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DCD2C01B9CF542801E0B15D /* Assets.xcassets */; };
+		59B0B9CD19F94B5386B7FAFC /* PWAConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65C49D710646476F9ACFB10 /* PWAConfiguration.swift */; };
+		8C7663F1FEE220FB53996961 /* PWAExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B972541B8B5D2C102D7BB5 /* PWAExporter.swift */; };
+		9FCA25E53CEA4AAB9B3F0225 /* ConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60195DAEEDD1FAD5D738E359 /* ConfigurationView.swift */; };
+		A0D334C446095A5AAAC352FE /* WindowPropertiesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC4D0DCFCE3A4433680EB9 /* WindowPropertiesSection.swift */; };
+		AF13308F5A687D9668332215 /* BetterPWAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF8F2E9A36DCCF0157C5CA4 /* BetterPWAApp.swift */; };
+		CFC27F222B2F22A2DDE042E2 /* URLInputSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477CED516007C251C09EFCAB /* URLInputSection.swift */; };
+		E4DC9DC7C83A41C18D82D642 /* ConfigurationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001E71E8C9F42E60F3D69B15 /* ConfigurationStore.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		001E71E8C9F42E60F3D69B15 /* ConfigurationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationStore.swift; sourceTree = "<group>"; };
+		03B972541B8B5D2C102D7BB5 /* PWAExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAExporter.swift; sourceTree = "<group>"; };
+		17756C90D1A2B3D048418290 /* BetterPWA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BetterPWA.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		30546DFD1CF7A48650591DED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3C2EA5410E6751792435A5A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		477CED516007C251C09EFCAB /* URLInputSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLInputSection.swift; sourceTree = "<group>"; };
+		4DCD2C01B9CF542801E0B15D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		60195DAEEDD1FAD5D738E359 /* ConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationView.swift; sourceTree = "<group>"; };
+		8BAC4D0DCFCE3A4433680EB9 /* WindowPropertiesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPropertiesSection.swift; sourceTree = "<group>"; };
+		BEA26D3FECAD6922B5A69EA1 /* CSSInputSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSSInputSection.swift; sourceTree = "<group>"; };
+		D1EC5FC44D8DD88D65283EFB /* ExportSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSection.swift; sourceTree = "<group>"; };
+		DBF8F2E9A36DCCF0157C5CA4 /* BetterPWAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterPWAApp.swift; sourceTree = "<group>"; };
+		F65C49D710646476F9ACFB10 /* PWAConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAConfiguration.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		24A91477410297656ACF83B4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				60195DAEEDD1FAD5D738E359 /* ConfigurationView.swift */,
+				3C2EA5410E6751792435A5A0 /* ContentView.swift */,
+				BEA26D3FECAD6922B5A69EA1 /* CSSInputSection.swift */,
+				D1EC5FC44D8DD88D65283EFB /* ExportSection.swift */,
+				477CED516007C251C09EFCAB /* URLInputSection.swift */,
+				8BAC4D0DCFCE3A4433680EB9 /* WindowPropertiesSection.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2E9C5A24712BD292030568D4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F65C49D710646476F9ACFB10 /* PWAConfiguration.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3A0BCC138188AA2F9052E0F5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				001E71E8C9F42E60F3D69B15 /* ConfigurationStore.swift */,
+				03B972541B8B5D2C102D7BB5 /* PWAExporter.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		4B1DD03BFBC829029D113080 = {
+			isa = PBXGroup;
+			children = (
+				4DCD2C01B9CF542801E0B15D /* Assets.xcassets */,
+				D251CFB338AF0F47A13544A5 /* App */,
+				2E9C5A24712BD292030568D4 /* Models */,
+				865D4A4AB00AC0C4A9C77F27 /* Resources */,
+				3A0BCC138188AA2F9052E0F5 /* Services */,
+				24A91477410297656ACF83B4 /* Views */,
+				F0D10914DDA16A94828DF3AA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		865D4A4AB00AC0C4A9C77F27 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				30546DFD1CF7A48650591DED /* Info.plist */,
+				A6C19E92E2459B97E1F23FB0 /* PWARunnerTemplate */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A6C19E92E2459B97E1F23FB0 /* PWARunnerTemplate */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PWARunnerTemplate;
+			sourceTree = "<group>";
+		};
+		D251CFB338AF0F47A13544A5 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				DBF8F2E9A36DCCF0157C5CA4 /* BetterPWAApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F0D10914DDA16A94828DF3AA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				17756C90D1A2B3D048418290 /* BetterPWA.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C42B0085CE2DA568C77487EB /* BetterPWA */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 51C84A4488DB2C143876FB95 /* Build configuration list for PBXNativeTarget "BetterPWA" */;
+			buildPhases = (
+				188FF3A9A060717E8E628A34 /* Sources */,
+				AEF9711346EBFA84899E00D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BetterPWA;
+			packageProductDependencies = (
+			);
+			productName = BetterPWA;
+			productReference = 17756C90D1A2B3D048418290 /* BetterPWA.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BE64A10A9B6C5BF02A2F245C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					C42B0085CE2DA568C77487EB = {
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = 280ABFA10ED1DDF37E2888F8 /* Build configuration list for PBXProject "BetterPWA" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 4B1DD03BFBC829029D113080;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F0D10914DDA16A94828DF3AA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C42B0085CE2DA568C77487EB /* BetterPWA */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AEF9711346EBFA84899E00D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CBB6001C09244DDE28CD18D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		188FF3A9A060717E8E628A34 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF13308F5A687D9668332215 /* BetterPWAApp.swift in Sources */,
+				2EAC42D6A247073C37B28621 /* CSSInputSection.swift in Sources */,
+				E4DC9DC7C83A41C18D82D642 /* ConfigurationStore.swift in Sources */,
+				9FCA25E53CEA4AAB9B3F0225 /* ConfigurationView.swift in Sources */,
+				316DF915D6A07CAE1CF196D4 /* ContentView.swift in Sources */,
+				23CD1C5C6DB8F8666A6510D8 /* ExportSection.swift in Sources */,
+				59B0B9CD19F94B5386B7FAFC /* PWAConfiguration.swift in Sources */,
+				8C7663F1FEE220FB53996961 /* PWAExporter.swift in Sources */,
+				CFC27F222B2F22A2DDE042E2 /* URLInputSection.swift in Sources */,
+				A0D334C446095A5AAAC352FE /* WindowPropertiesSection.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		51017B7EB06957D8C57BF868 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.betterpwa.app;
+				PRODUCT_NAME = BetterPWA;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8FAC86E71CCD9307304577E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		C51C5E2B4DB98A798529FF46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		E9E7C10181CE70396CA64B22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.betterpwa.app;
+				PRODUCT_NAME = BetterPWA;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		280ABFA10ED1DDF37E2888F8 /* Build configuration list for PBXProject "BetterPWA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8FAC86E71CCD9307304577E5 /* Debug */,
+				C51C5E2B4DB98A798529FF46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		51C84A4488DB2C143876FB95 /* Build configuration list for PBXNativeTarget "BetterPWA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51017B7EB06957D8C57BF868 /* Debug */,
+				E9E7C10181CE70396CA64B22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BE64A10A9B6C5BF02A2F245C /* Project object */;
+}
