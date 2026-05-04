@@ -1,2 +1,0 @@
-- [ ] Fix css injection, breaks pwa creation "You can’t open the application “spoter.app” because it may be damaged or incomplete."
-- [ ] Fix UI sidepanel and app persistence.
