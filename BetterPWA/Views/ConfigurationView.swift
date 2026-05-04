@@ -19,7 +19,9 @@ struct ConfigurationView: View {
                 Divider()
                 ExportSection(config: config)
             }
-            .padding(20)
+            .padding(.horizontal, 40)
+            .padding(.top, 20)
+            .padding(.bottom, 50)
         }
         .onChange(of: config) { newValue in
             store.update(newValue)

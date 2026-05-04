@@ -52,7 +52,7 @@ class PWAExporter {
         let configData = try JSONEncoder().encode(config)
         try configData.write(to: resourcesDir.appendingPathComponent("config.json"))
 
-        let bundleInfo: [String: Any] = [
+        var bundleInfo: [String: Any] = [
             "CFBundleIdentifier": "com.betterpwa.\(appName.lowercased().replacingOccurrences(of: " ", with: "-"))",
             "CFBundleName": appName,
             "CFBundleExecutable": "PWAApp",
@@ -64,6 +64,13 @@ class PWAExporter {
             "NSPrincipalClass": "NSApplication",
             "NSHighResolutionCapable": true
         ]
+
+        if !config.iconPath.isEmpty && FileManager.default.fileExists(atPath: config.iconPath) {
+            let iconURL = URL(fileURLWithPath: config.iconPath)
+            let destinationURL = resourcesDir.appendingPathComponent("AppIcon.icns")
+            try fileManager.copyItem(at: iconURL, to: destinationURL)
+            bundleInfo["CFBundleIconFile"] = "AppIcon.icns"
+        }
 
         let infoPlistData = try PropertyListSerialization.data(fromPropertyList: bundleInfo, format: .xml, options: 0)
         try infoPlistData.write(to: contentsDir.appendingPathComponent("Info.plist"))

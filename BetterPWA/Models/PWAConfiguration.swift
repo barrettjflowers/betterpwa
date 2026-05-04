@@ -1,13 +1,14 @@
 import Foundation
 
 enum TitlebarStyle: String, Codable, CaseIterable {
-    case noTitlebar = "No Titlebar"
+    case noTitlebar = "Integrated"
 }
 
 struct PWAConfiguration: Codable, Identifiable, Equatable {
     let id: UUID
     var name: String
     var url: String
+    var iconPath: String
     var customCSS: String
     var titlebarStyle: TitlebarStyle
     var backgroundBlurEnabled: Bool
@@ -18,6 +19,7 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
         id: UUID = UUID(),
         name: String = "",
         url: String = "",
+        iconPath: String = "",
         customCSS: String = "",
         cssEnabled: Bool = false,
         titlebarStyle: TitlebarStyle = .noTitlebar,
@@ -28,6 +30,7 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
         self.id = id
         self.name = name
         self.url = url
+        self.iconPath = iconPath
         self.customCSS = customCSS
         self.titlebarStyle = titlebarStyle
         self.backgroundBlurEnabled = backgroundBlurEnabled
