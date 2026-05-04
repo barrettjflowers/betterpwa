@@ -117,6 +117,7 @@ class PWAExporter {
 
     private func createNativeApp(at appDir: URL, config: PWAConfiguration, appName: String) throws {
         let macOSDir = appDir.appendingPathComponent("Contents/MacOS")
+        let resourcesDir = appDir.appendingPathComponent("Contents/Resources")
 
         var appSource = """
 import AppKit
@@ -125,19 +126,19 @@ import WebKit
 @main
 struct PWAApp {
     static let appName = "\(appName)"
-    
+
     static func main() {
         let app = NSApplication.shared
         let config = loadConfig()
         let window = createWindow(config: config)
         app.setActivationPolicy(.regular)
-        
+
         let mainMenu = NSMenu()
         let appMenu = NSMenu()
         appMenu.addItem(withTitle: "Quit \(appName)", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         mainMenu.addItem(NSMenuItem(title: appName, action: nil, keyEquivalent: ""))
         mainMenu.item(at: 0)?.submenu = appMenu
-        
+
         let editMenu = NSMenu(title: "Edit")
         editMenu.addItem(withTitle: "Cut", action: #selector(NSText.cut(_:)), keyEquivalent: "x")
         editMenu.addItem(withTitle: "Copy", action: #selector(NSText.copy(_:)), keyEquivalent: "c")
@@ -145,16 +146,21 @@ struct PWAApp {
         editMenu.addItem(withTitle: "Select All", action: #selector(NSText.selectAll(_:)), keyEquivalent: "a")
         mainMenu.addItem(NSMenuItem(title: "Edit", action: nil, keyEquivalent: ""))
         mainMenu.item(at: 1)?.submenu = editMenu
-        
+
         let windowMenu = NSMenu(title: "Window")
         windowMenu.addItem(withTitle: "Close", action: #selector(NSWindow.performClose(_:)), keyEquivalent: "w")
         windowMenu.addItem(withTitle: "Minimize", action: #selector(NSWindow.performMiniaturize(_:)), keyEquivalent: "m")
         windowMenu.addItem(withTitle: "Zoom", action: #selector(NSWindow.performZoom(_:)), keyEquivalent: "")
         mainMenu.addItem(NSMenuItem(title: "Window", action: nil, keyEquivalent: ""))
         mainMenu.item(at: 2)?.submenu = windowMenu
-        
+
+        let viewMenu = NSMenu(title: "View")
+        viewMenu.addItem(withTitle: "Enter/Exit Full Screen", action: #selector(NSWindow.toggleFullScreen(_:)), keyEquivalent: "f")
+        mainMenu.addItem(NSMenuItem(title: "View", action: nil, keyEquivalent: ""))
+        mainMenu.item(at: 3)?.submenu = viewMenu
+
         app.mainMenu = mainMenu
-        
+
         app.run()
     }
 
@@ -180,7 +186,7 @@ struct PWAApp {
         window.title = "\(appName)"
         window.center()
         window.setFrameAutosaveName("PWAWindow")
-window.titlebarAppearsTransparent = true
+        window.titlebarAppearsTransparent = true
         window.titleVisibility = .hidden
         window.backgroundColor = .clear
         window.hasShadow = true
@@ -190,30 +196,31 @@ window.titlebarAppearsTransparent = true
             let visualEffect = NSVisualEffectView(frame: window.contentView!.bounds)
             visualEffect.autoresizingMask = [.width, .height]
             visualEffect.wantsLayer = true
-            visualEffect.material = .selection
+            visualEffect.material = .hudWindow
             visualEffect.blendingMode = .behindWindow
-            visualEffect.state = .active
-            
+            visualEffect.state = .followsWindowActiveState
+
             let webContainer = NSView(frame: visualEffect.bounds)
             webContainer.autoresizingMask = [.width, .height]
             webContainer.wantsLayer = true
             webContainer.layer?.backgroundColor = NSColor.clear.cgColor
             visualEffect.addSubview(webContainer)
-            
+
             let webView = WKWebView(frame: webContainer.bounds)
             webView.autoresizingMask = [.width, .height]
             webView.setValue(false, forKey: "drawsBackground")
             webView.wantsLayer = true
             webView.layer?.backgroundColor = NSColor.clear.cgColor
+            webView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
             webContainer.addSubview(webView)
-            
+
             window.contentView = visualEffect
-            
+
             if let url = URL(string: config.url) {
                 let request = URLRequest(url: url)
                 webView.load(request)
             }
-            
+
             window.makeKeyAndOrderFront(nil)
             NSApp.activate(ignoringOtherApps: true)
         } else {
@@ -222,19 +229,17 @@ window.titlebarAppearsTransparent = true
             webView.setValue(false, forKey: "drawsBackground")
             webView.wantsLayer = true
             webView.layer?.backgroundColor = NSColor.clear.cgColor
+            webView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
             window.contentView?.addSubview(webView)
-            
+
             if let url = URL(string: config.url) {
                 let request = URLRequest(url: url)
                 webView.load(request)
             }
-            
+
             window.makeKeyAndOrderFront(nil)
             NSApp.activate(ignoringOtherApps: true)
         }
-
-        window.makeKeyAndOrderFront(nil)
-        NSApp.activate(ignoringOtherApps: true)
 
         return window
     }
@@ -248,40 +253,27 @@ struct AppConfig: Codable {
 }
 """
 
-if !config.customCSS.isEmpty {
-            let escapedCSS = config.customCSS
-                .replacingOccurrences(of: "\\", with: "\\\\")
-                .replacingOccurrences(of: "\"", with: "\\\"")
-                .replacingOccurrences(of: "\n", with: "\\n")
-                .replacingOccurrences(of: "\r", with: "")
+        if !config.customCSS.isEmpty {
+            let cssFile = resourcesDir.appendingPathComponent("injected.css")
+            try config.customCSS.write(to: cssFile, atomically: true, encoding: .utf8)
 
-            appSource += """
+            let cssInjection = """
 
-class CSSDelegate: NSObject, WKNavigationDelegate {
-    static let injectedCSS = "\(escapedCSS)"
-    static var shared: CSSDelegate?
-
+class CSSInjection: NSObject, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        let js = "var s=document.createElement('style');s.textContent=\\\"" + CSSDelegate.injectedCSS + "\\\";document.head.appendChild(s);"
+        guard let cssURL = Bundle.main.url(forResource: "injected", withExtension: "css") else { return }
+        guard let cssData = try? Data(contentsOf: cssURL) else { return }
+        let js = "var s=document.createElement('style');s.textContent=atob('" + cssData.base64EncodedString() + "');document.head.appendChild(s);"
         webView.evaluateJavaScript(js, completionHandler: nil)
     }
 }
+var cssDelegateHolder: CSSInjection?
 """
+            appSource = appSource.replacingOccurrences(of: "let webView = WKWebView(frame: webContainer.bounds)", with: "let webView = WKWebView(frame: webContainer.bounds)\n            webView.customUserAgent = \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15\"\n            let delegate = CSSInjection()\n            cssDelegateHolder = delegate\n            webView.navigationDelegate = delegate")
 
-            appSource = appSource.replacingOccurrences(of: "webContainer.addSubview(webView)", with: "CSSDelegate.shared = CSSDelegate()\n        webView.navigationDelegate = CSSDelegate.shared")
+            appSource = appSource.replacingOccurrences(of: "let webView = WKWebView(frame: window.contentView!.bounds)", with: "let webView = WKWebView(frame: window.contentView!.bounds)\n            webView.customUserAgent = \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15\"\n            let delegate = CSSInjection()\n            cssDelegateHolder = delegate\n            webView.navigationDelegate = delegate")
 
-            appSource = appSource.replacingOccurrences(of: "webView.load(request)", with: "CSSDelegate.shared = CSSDelegate()\n        webView.navigationDelegate = CSSDelegate.shared\n        webView.load(request)")
-
-            appSource = appSource.replacingOccurrences(of: "window.contentView?.addSubview(webView)", with: "CSSDelegate.shared = CSSDelegate()\n        webView.navigationDelegate = CSSDelegate.shared\n        window.contentView?.addSubview(webView)")
-        }
-}
-"""
-
-            appSource = appSource.replacingOccurrences(of: "webContainer.addSubview(webView)", with: "webContainer.addSubview(webView)\n        webView.navigationDelegate = CSSDelegate()")
-
-            appSource = appSource.replacingOccurrences(of: "webView.load(request)", with: "webView.navigationDelegate = CSSDelegate()\n        webView.load(request)")
-
-            appSource = appSource.replacingOccurrences(of: "window.contentView?.addSubview(webView)", with: "window.contentView?.addSubview(webView)\n        webView.navigationDelegate = CSSDelegate()")
+            appSource += cssInjection
         }
 
         let swiftFile = macOSDir.appendingPathComponent("PWAApp.swift")
