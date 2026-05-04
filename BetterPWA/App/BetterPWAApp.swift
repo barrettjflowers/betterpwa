@@ -8,7 +8,7 @@ struct BetterPWAApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(store)
-                .frame(width: 700, height: 600)
+                .frame(width: 700, height: 650)
         }
         .windowStyle(.hiddenTitleBar)
         .windowResizability(.contentSize)

@@ -11,7 +11,6 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
     var customCSS: String
     var titlebarStyle: TitlebarStyle
     var backgroundBlurEnabled: Bool
-    var blurRadius: Double
     var createdAt: Date
     var updatedAt: Date
 
@@ -23,7 +22,6 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
         cssEnabled: Bool = false,
         titlebarStyle: TitlebarStyle = .noTitlebar,
         backgroundBlurEnabled: Bool = false,
-        blurRadius: Double = 20.0,
         createdAt: Date = Date(),
         updatedAt: Date = Date()
     ) {
@@ -33,7 +31,6 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
         self.customCSS = customCSS
         self.titlebarStyle = titlebarStyle
         self.backgroundBlurEnabled = backgroundBlurEnabled
-        self.blurRadius = blurRadius
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }

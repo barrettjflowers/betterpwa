@@ -249,7 +249,6 @@ struct AppConfig: Codable {
     var url: String = ""
     var customCSS: String = ""
     var backgroundBlurEnabled: Bool = false
-    var blurRadius: Double = 20.0
 }
 """
 

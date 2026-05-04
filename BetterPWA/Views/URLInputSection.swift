@@ -16,11 +16,11 @@ struct URLInputSection: View {
                     }
 
             if showValidationError {
-                Text("Please enter a valid URL (e.g., https://example.com)")
+                Text("Please enter a valid URL (ie., https://example.com)")
                     .font(.caption)
                     .foregroundStyle(.red)
             } else {
-                Text("Enter the URL of the web app you want to package")
+                Text("Enter the URL of the web app you want to bundle")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
