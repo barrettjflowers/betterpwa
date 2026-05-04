@@ -16,12 +16,18 @@ class PWAExporter {
     private let fileManager = FileManager.default
 
     func export(config: PWAConfiguration, appName: String) -> Result<Void, Error> {
+        print("=== Starting export for \(appName) ===")
+        print("URL: \(config.url)")
+        print("Titlebar style: \(config.titlebarStyle)")
+        print("Background blur: \(config.backgroundBlurEnabled)")
+
         guard let url = URL(string: config.url), url.scheme != nil else {
             return .failure(PWAExporterError.invalidURL)
         }
 
         let appsDir = URL(fileURLWithPath: "/Applications/betterpwa")
         let appDir = appsDir.appendingPathComponent("\(appName).app")
+        print("App dir: \(appDir.path)")
 
         do {
             if !fileManager.fileExists(atPath: appsDir.path) {
@@ -182,7 +188,8 @@ struct PWAApp {
     }
 
     static func createWindow(config: AppConfig) -> NSWindow {
-        let styleMask: NSWindow.StyleMask = [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView]
+        let isLegacy = config.titlebarStyle == "Legacy"
+        let styleMask: NSWindow.StyleMask = isLegacy ? [.titled, .closable, .miniaturizable, .resizable] : [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView]
         let window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 1024, height: 768),
             styleMask: styleMask,
@@ -193,11 +200,20 @@ struct PWAApp {
         window.title = "\(appName)"
         window.center()
         window.setFrameAutosaveName("PWAWindow")
-        window.titlebarAppearsTransparent = true
-        window.titleVisibility = .hidden
-        window.backgroundColor = .clear
-        window.hasShadow = true
-        window.isOpaque = false
+
+        if isLegacy {
+            window.titlebarAppearsTransparent = false
+            window.titleVisibility = .visible
+            window.backgroundColor = .white
+            window.hasShadow = true
+            window.isOpaque = true
+        } else {
+            window.titlebarAppearsTransparent = true
+            window.titleVisibility = .hidden
+            window.backgroundColor = .clear
+            window.hasShadow = true
+            window.isOpaque = false
+        }
 
         if config.backgroundBlurEnabled {
             let visualEffect = NSVisualEffectView(frame: window.contentView!.bounds)
@@ -227,26 +243,25 @@ struct PWAApp {
                 let request = URLRequest(url: url)
                 webView.load(request)
             }
-
-            window.makeKeyAndOrderFront(nil)
-            NSApp.activate(ignoringOtherApps: true)
         } else {
             let webView = WKWebView(frame: window.contentView!.bounds)
             webView.autoresizingMask = [.width, .height]
-            webView.setValue(false, forKey: "drawsBackground")
-            webView.wantsLayer = true
-            webView.layer?.backgroundColor = NSColor.clear.cgColor
+            if !isLegacy {
+                webView.setValue(false, forKey: "drawsBackground")
+                webView.wantsLayer = true
+                webView.layer?.backgroundColor = NSColor.clear.cgColor
+            }
             webView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
-            window.contentView?.addSubview(webView)
+            window.contentView = webView
 
             if let url = URL(string: config.url) {
                 let request = URLRequest(url: url)
                 webView.load(request)
             }
-
-            window.makeKeyAndOrderFront(nil)
-            NSApp.activate(ignoringOtherApps: true)
         }
+
+        window.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
 
         return window
     }
@@ -255,6 +270,7 @@ struct PWAApp {
 struct AppConfig: Codable {
     var url: String = ""
     var customCSS: String = ""
+    var titlebarStyle: String = "No Titlebar"
     var backgroundBlurEnabled: Bool = false
 }
 """
@@ -295,16 +311,27 @@ var cssDelegateHolder: CSSInjection?
         process.executableURL = URL(fileURLWithPath: "/bin/bash")
         process.arguments = ["./build.sh"]
         process.currentDirectoryURL = macOSDir
-        process.standardOutput = FileHandle.nullDevice
-        process.standardError = FileHandle.nullDevice
 
+        let pipe = Pipe()
+        process.standardOutput = pipe
+        process.standardError = pipe
+
+        print("Running build script in \(macOSDir.path)")
         try process.run()
         process.waitUntilExit()
 
-        if process.terminationStatus == 0 {
-            try? fileManager.removeItem(at: buildFile)
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        let output = String(data: data, encoding: .utf8) ?? ""
+        print("Build output: \(output)")
+        print("Termination status: \(process.terminationStatus)")
+
+        if process.terminationStatus != 0 {
+            print("Build failed: \(output)")
+            print("Keeping PWAApp.swift for debugging")
         } else {
-            print("Build failed, keeping PWAApp.swift for debugging")
+            print("Build succeeded, removing build files")
+            try? fileManager.removeItem(at: buildFile)
+            try? fileManager.removeItem(at: swiftFile)
         }
     }
 }

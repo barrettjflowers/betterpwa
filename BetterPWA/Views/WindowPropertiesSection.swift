@@ -21,10 +21,8 @@ struct WindowPropertiesSection: View {
                 .labelsHidden()
             }
 
-            if config.titlebarStyle == .noTitlebar {
-                Toggle("Background Blur", isOn: $config.backgroundBlurEnabled)
-                    .font(.subheadline)
-            }
+            Toggle("Background Blur", isOn: $config.backgroundBlurEnabled)
+                .font(.subheadline)
         }
     }
 }

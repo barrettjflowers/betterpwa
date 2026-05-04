@@ -1,7 +1,8 @@
 import Foundation
 
 enum TitlebarStyle: String, Codable, CaseIterable {
-    case noTitlebar = "Integrated"
+    case noTitlebar = "No Titlebar"
+    case legacy = "Legacy"
 }
 
 struct PWAConfiguration: Codable, Identifiable, Equatable {

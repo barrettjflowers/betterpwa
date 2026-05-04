@@ -47,11 +47,13 @@ struct URLInputSection: View {
                 }
                 .font(.caption)
 
+                Spacer()
+
                 if !config.iconPath.isEmpty, FileManager.default.fileExists(atPath: config.iconPath) {
                     Image(nsImage: NSImage(contentsOfFile: config.iconPath)!)
                         .resizable()
-                        .frame(width: 36, height: 36)
-                        .cornerRadius(6)
+                        .frame(width: 24, height: 24)
+                        .cornerRadius(4)
                 }
             }
         }
