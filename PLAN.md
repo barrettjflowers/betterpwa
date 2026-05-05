@@ -1,4 +1,4 @@
-# BetterPWA - macOS PWA Builder
+# betterpwa - macOS PWA Builder
 
 ## Overview
 A standalone macOS application that allows users to create, configure, and package web apps as native macOS .app bundles. Users can input a URL, customize styling via CSS injection, and configure window properties before exporting as a runnable application.
@@ -9,7 +9,7 @@ A standalone macOS application that allows users to create, configure, and packa
 
 ### Two-Component System
 
-1. **BetterPWA Builder (This App)** - UI for configuring and exporting PWAs
+1. **betterpwa Builder (This App)** - UI for configuring and exporting PWAs
 2. **PWA Runner** - A lightweight app template that gets packaged with user config
 
 ### Packaging Strategy
@@ -113,7 +113,7 @@ enum TitlebarStyle: String, Codable, CaseIterable {
 ```
 
 ### Storage
-- Save configurations to `~/Library/Application Support/BetterPWA/configs.json`
+- Save configurations to `~/Library/Application Support/betterpwa/configs.json`
 - Store as JSON array
 
 ---
@@ -156,9 +156,9 @@ MyApp.app/
 
 ```
 betterpwa/
-├── BetterPWA/                    # Main app source
+├── betterpwa/                    # Main app source
 │   ├── App/
-│   │   └── BetterPWAApp.swift
+│   │   └── betterpwaApp.swift
 │   ├── Views/
 │   │   ├── ContentView.swift
 │   │   ├── SidebarView.swift

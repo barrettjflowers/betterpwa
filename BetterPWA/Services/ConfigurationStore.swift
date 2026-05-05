@@ -6,7 +6,7 @@ class ConfigurationStore: ObservableObject {
     private let fileManager = FileManager.default
     private var configFileURL: URL {
         let appSupport = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-        let betterPWA = appSupport.appendingPathComponent("BetterPWA", isDirectory: true)
+        let betterPWA = appSupport.appendingPathComponent("betterpwa", isDirectory: true)
         return betterPWA.appendingPathComponent("config.json")
     }
 

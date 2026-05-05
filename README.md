@@ -1,4 +1,4 @@
-# BetterPWA
+# betterpwa
 
 A macOS app that packages any website as a native macOS `.app` bundle.
 
@@ -9,11 +9,11 @@ A macOS app that packages any website as a native macOS `.app` bundle.
 
 ## Usage
 
-### Build BetterPWA
+### Build betterpwa
 
 ```bash
-cd BetterPWA
-xcodebuild -project BetterPWA.xcodeproj -scheme BetterPWA -configuration Release build
+cd betterpwa
+xcodebuild -project betterpwa.xcodeproj -scheme betterpwa -configuration Release build
 ```
 
 Or use the convenience script:
@@ -23,7 +23,7 @@ Or use the convenience script:
 
 ### Creating a PWA
 
-1. Open BetterPWA
+1. Open betterpwa
 2. Enter the URL of the website you want to package
 3. (Optional) Add custom CSS
 4. (Optional) Adjust window properties (titlebar style)
@@ -34,9 +34,9 @@ The app will be created at `/Applications/betterpwa/[AppName].app`
 
 ### Development Version
 
-After making changes to the source code, you need to rebuild BetterPWA:
+After making changes to the source code, you need to rebuild betterpwa:
 ```bash
-xcodebuild -project BetterPWA.xcodeproj -scheme BetterPWA -configuration Release clean build
+xcodebuild -project betterpwa.xcodeproj -scheme betterpwa -configuration Release clean build
 ```
 
 ## Features
@@ -52,6 +52,3 @@ xcodebuild -project BetterPWA.xcodeproj -scheme BetterPWA -configuration Release
 - **AppKit** - Window management
 - **WebKit** - WKWebView for rendering web content
 
-## License
-
-MIT
