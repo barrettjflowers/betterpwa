@@ -8,16 +8,12 @@ struct CSSInputSection: View {
             Text("Custom CSS")
                 .font(.headline)
 
-            TextEditor(text: $config.customCSS)
-                .font(.system(.body, design: .monospaced))
-                .frame(height: 150)
-                .scrollContentBackground(.hidden)
-                .background(Color(nsColor: .textBackgroundColor))
-                .cornerRadius(6)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 6)
-                        .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                )
+            TextField("CSS File Path", text: $config.cssFilePath)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+
+            Text("ie. /Users/Home/.config/betterpwa/spotify.css")
+                .font(.caption)
+                .foregroundColor(.secondary)
         }
     }
 }

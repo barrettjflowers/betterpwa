@@ -101,19 +101,23 @@ class PWAExporter {
             "end tell",
         ]
 
-        if !config.customCSS.isEmpty {
-            scriptLines.append("")
-            scriptLines.append("delay 1")
-            scriptLines.append("")
-            scriptLines.append("tell application \"Safari\"")
-            scriptLines.append("    tell window 1")
-            let escapedCSS = config.customCSS
-                .replacingOccurrences(of: "\\", with: "\\\\")
-                .replacingOccurrences(of: "\"", with: "\\\"")
-                .replacingOccurrences(of: "\n", with: "\\n")
-            scriptLines.append("            do JavaScript \"var s=document.createElement('style');s.textContent='\(escapedCSS)';document.head.appendChild(s);\" in current tab")
-            scriptLines.append("    end tell")
-            scriptLines.append("end tell")
+        if !config.cssFilePath.isEmpty {
+            let cssPath = config.cssFilePath
+            if FileManager.default.fileExists(atPath: cssPath),
+               let cssContent = try? String(contentsOfFile: cssPath, encoding: .utf8) {
+                scriptLines.append("")
+                scriptLines.append("delay 1")
+                scriptLines.append("")
+                scriptLines.append("tell application \"Safari\"")
+                scriptLines.append("    tell window 1")
+                let escapedCSS = cssContent
+                    .replacingOccurrences(of: "\\", with: "\\\\")
+                    .replacingOccurrences(of: "\"", with: "\\\"")
+                    .replacingOccurrences(of: "\n", with: "\\n")
+                scriptLines.append("            do JavaScript \"var s=document.createElement('style');s.textContent='\(escapedCSS)';document.head.appendChild(s);\" in current tab")
+                scriptLines.append("    end tell")
+                scriptLines.append("end tell")
+            }
         }
 
         let appleScript = scriptLines.joined(separator: "\n")
@@ -269,17 +273,19 @@ struct PWAApp {
 
 struct AppConfig: Codable {
     var url: String = ""
-    var customCSS: String = ""
     var titlebarStyle: String = "No Titlebar"
     var backgroundBlurEnabled: Bool = false
 }
 """
 
-        if !config.customCSS.isEmpty {
-            let cssFile = resourcesDir.appendingPathComponent("injected.css")
-            try config.customCSS.write(to: cssFile, atomically: true, encoding: .utf8)
+        if !config.cssFilePath.isEmpty {
+            let cssPath = config.cssFilePath
+            if FileManager.default.fileExists(atPath: cssPath),
+               let cssContent = try? String(contentsOfFile: cssPath, encoding: .utf8) {
+                let cssFile = resourcesDir.appendingPathComponent("injected.css")
+                try cssContent.write(to: cssFile, atomically: true, encoding: .utf8)
 
-            let cssInjection = """
+                let cssInjection = """
 
 class CSSInjection: NSObject, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -291,11 +297,12 @@ class CSSInjection: NSObject, WKNavigationDelegate {
 }
 var cssDelegateHolder: CSSInjection?
 """
-            appSource = appSource.replacingOccurrences(of: "let webView = WKWebView(frame: webContainer.bounds)", with: "let webView = WKWebView(frame: webContainer.bounds)\n            webView.customUserAgent = \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15\"\n            let delegate = CSSInjection()\n            cssDelegateHolder = delegate\n            webView.navigationDelegate = delegate")
+                appSource = appSource.replacingOccurrences(of: "let webView = WKWebView(frame: webContainer.bounds)", with: "let webView = WKWebView(frame: webContainer.bounds)\n            webView.customUserAgent = \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15\"\n            let delegate = CSSInjection()\n            cssDelegateHolder = delegate\n            webView.navigationDelegate = delegate")
 
-            appSource = appSource.replacingOccurrences(of: "let webView = WKWebView(frame: window.contentView!.bounds)", with: "let webView = WKWebView(frame: window.contentView!.bounds)\n            webView.customUserAgent = \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15\"\n            let delegate = CSSInjection()\n            cssDelegateHolder = delegate\n            webView.navigationDelegate = delegate")
+                appSource = appSource.replacingOccurrences(of: "let webView = WKWebView(frame: window.contentView!.bounds)", with: "let webView = WKWebView(frame: window.contentView!.bounds)\n            webView.customUserAgent = \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15\"\n            let delegate = CSSInjection()\n            cssDelegateHolder = delegate\n            webView.navigationDelegate = delegate")
 
-            appSource += cssInjection
+                appSource += cssInjection
+            }
         }
 
         let swiftFile = macOSDir.appendingPathComponent("PWAApp.swift")

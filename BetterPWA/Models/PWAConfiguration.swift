@@ -10,7 +10,7 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
     var name: String
     var url: String
     var iconPath: String
-    var customCSS: String
+    var cssFilePath: String
     var titlebarStyle: TitlebarStyle
     var backgroundBlurEnabled: Bool
     var createdAt: Date
@@ -21,8 +21,7 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
         name: String = "",
         url: String = "",
         iconPath: String = "",
-        customCSS: String = "",
-        cssEnabled: Bool = false,
+        cssFilePath: String = "",
         titlebarStyle: TitlebarStyle = .noTitlebar,
         backgroundBlurEnabled: Bool = false,
         createdAt: Date = Date(),
@@ -32,7 +31,7 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
         self.name = name
         self.url = url
         self.iconPath = iconPath
-        self.customCSS = customCSS
+        self.cssFilePath = cssFilePath
         self.titlebarStyle = titlebarStyle
         self.backgroundBlurEnabled = backgroundBlurEnabled
         self.createdAt = createdAt
