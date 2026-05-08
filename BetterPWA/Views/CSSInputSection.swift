@@ -11,7 +11,7 @@ struct CSSInputSection: View {
             TextField("CSS File Path", text: $config.cssFilePath)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
-            Text("ie. /Users/Home/.config/betterpwa/spotify.css")
+            Text("/users/home/.config/betterpwa/spotify.css")
                 .font(.caption)
                 .foregroundColor(.secondary)
         }
