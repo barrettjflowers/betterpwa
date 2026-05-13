@@ -59,6 +59,9 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
         case titlebarStyle
         case trafficLightsHidden
         case backgroundBlurEnabled
+        case cameraPermission
+        case microphonePermission
+        case screenCapturePermission
         case createdAt
         case updatedAt
     }
@@ -73,6 +76,9 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
         titlebarStyle = try container.decode(TitlebarStyle.self, forKey: .titlebarStyle)
         trafficLightsHidden = try container.decodeIfPresent(Bool.self, forKey: .trafficLightsHidden) ?? false
         backgroundBlurEnabled = try container.decode(Bool.self, forKey: .backgroundBlurEnabled)
+        cameraPermission = try container.decodeIfPresent(Bool.self, forKey: .cameraPermission) ?? false
+        microphonePermission = try container.decodeIfPresent(Bool.self, forKey: .microphonePermission) ?? false
+        screenCapturePermission = try container.decodeIfPresent(Bool.self, forKey: .screenCapturePermission) ?? false
         createdAt = try container.decode(Date.self, forKey: .createdAt)
         updatedAt = try container.decode(Date.self, forKey: .updatedAt)
     }
