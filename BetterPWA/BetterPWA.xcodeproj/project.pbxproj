@@ -16,6 +16,7 @@
 		9FCA25E53CEA4AAB9B3F0225 /* ConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60195DAEEDD1FAD5D738E359 /* ConfigurationView.swift */; };
 		A0D334C446095A5AAAC352FE /* WindowPropertiesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC4D0DCFCE3A4433680EB9 /* WindowPropertiesSection.swift */; };
 		AF13308F5A687D9668332215 /* BetterPWAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF8F2E9A36DCCF0157C5CA4 /* BetterPWAApp.swift */; };
+		CD08F3BDB4481B7F61367FE9 /* PermissionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ADD95B8A7C257F99418F6A /* PermissionsSection.swift */; };
 		CFC27F222B2F22A2DDE042E2 /* URLInputSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477CED516007C251C09EFCAB /* URLInputSection.swift */; };
 		E4DC9DC7C83A41C18D82D642 /* ConfigurationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001E71E8C9F42E60F3D69B15 /* ConfigurationStore.swift */; };
 /* End PBXBuildFile section */
@@ -23,11 +24,12 @@
 /* Begin PBXFileReference section */
 		001E71E8C9F42E60F3D69B15 /* ConfigurationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationStore.swift; sourceTree = "<group>"; };
 		03B972541B8B5D2C102D7BB5 /* PWAExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAExporter.swift; sourceTree = "<group>"; };
-		17756C90D1A2B3D048418290 /* betterpwa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = betterpwa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		17756C90D1A2B3D048418290 /* BetterPWA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BetterPWA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30546DFD1CF7A48650591DED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3C2EA5410E6751792435A5A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		477CED516007C251C09EFCAB /* URLInputSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLInputSection.swift; sourceTree = "<group>"; };
 		4DCD2C01B9CF542801E0B15D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		57ADD95B8A7C257F99418F6A /* PermissionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsSection.swift; sourceTree = "<group>"; };
 		60195DAEEDD1FAD5D738E359 /* ConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationView.swift; sourceTree = "<group>"; };
 		8BAC4D0DCFCE3A4433680EB9 /* WindowPropertiesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPropertiesSection.swift; sourceTree = "<group>"; };
 		BEA26D3FECAD6922B5A69EA1 /* CSSInputSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSSInputSection.swift; sourceTree = "<group>"; };
@@ -44,6 +46,7 @@
 				3C2EA5410E6751792435A5A0 /* ContentView.swift */,
 				BEA26D3FECAD6922B5A69EA1 /* CSSInputSection.swift */,
 				D1EC5FC44D8DD88D65283EFB /* ExportSection.swift */,
+				57ADD95B8A7C257F99418F6A /* PermissionsSection.swift */,
 				477CED516007C251C09EFCAB /* URLInputSection.swift */,
 				8BAC4D0DCFCE3A4433680EB9 /* WindowPropertiesSection.swift */,
 			);
@@ -115,9 +118,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C42B0085CE2DA568C77487EB /* betterpwa */ = {
+		C42B0085CE2DA568C77487EB /* BetterPWA */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 51C84A4488DB2C143876FB95 /* Build configuration list for PBXNativeTarget "betterpwa" */;
+			buildConfigurationList = 51C84A4488DB2C143876FB95 /* Build configuration list for PBXNativeTarget "BetterPWA" */;
 			buildPhases = (
 				188FF3A9A060717E8E628A34 /* Sources */,
 				AEF9711346EBFA84899E00D0 /* Resources */,
@@ -126,11 +129,11 @@
 			);
 			dependencies = (
 			);
-			name = betterpwa;
+			name = BetterPWA;
 			packageProductDependencies = (
 			);
-			productName = betterpwa;
-			productReference = 17756C90D1A2B3D048418290 /* betterpwa.app */;
+			productName = BetterPWA;
+			productReference = 17756C90D1A2B3D048418290 /* BetterPWA.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -147,7 +150,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 280ABFA10ED1DDF37E2888F8 /* Build configuration list for PBXProject "betterpwa" */;
+			buildConfigurationList = 280ABFA10ED1DDF37E2888F8 /* Build configuration list for PBXProject "BetterPWA" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -161,7 +164,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C42B0085CE2DA568C77487EB /* betterpwa */,
+				C42B0085CE2DA568C77487EB /* BetterPWA */,
 			);
 		};
 /* End PBXProject section */
@@ -190,6 +193,7 @@
 				23CD1C5C6DB8F8666A6510D8 /* ExportSection.swift in Sources */,
 				59B0B9CD19F94B5386B7FAFC /* PWAConfiguration.swift in Sources */,
 				8C7663F1FEE220FB53996961 /* PWAExporter.swift in Sources */,
+				CD08F3BDB4481B7F61367FE9 /* PermissionsSection.swift in Sources */,
 				CFC27F222B2F22A2DDE042E2 /* URLInputSection.swift in Sources */,
 				A0D334C446095A5AAAC352FE /* WindowPropertiesSection.swift in Sources */,
 			);
@@ -212,7 +216,7 @@
 					"@executable_path/../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.betterpwa.app;
-				PRODUCT_NAME = betterpwa;
+				PRODUCT_NAME = BetterPWA;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -350,7 +354,7 @@
 					"@executable_path/../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.betterpwa.app;
-				PRODUCT_NAME = betterpwa;
+				PRODUCT_NAME = BetterPWA;
 				SDKROOT = macosx;
 			};
 			name = Release;
