@@ -12,6 +12,7 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
     var iconPath: String
     var cssFilePath: String
     var titlebarStyle: TitlebarStyle
+    var trafficLightsHidden: Bool
     var backgroundBlurEnabled: Bool
     var createdAt: Date
     var updatedAt: Date
@@ -23,6 +24,7 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
         iconPath: String = "",
         cssFilePath: String = "",
         titlebarStyle: TitlebarStyle = .noTitlebar,
+        trafficLightsHidden: Bool = false,
         backgroundBlurEnabled: Bool = false,
         createdAt: Date = Date(),
         updatedAt: Date = Date()
@@ -33,9 +35,37 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
         self.iconPath = iconPath
         self.cssFilePath = cssFilePath
         self.titlebarStyle = titlebarStyle
+        self.trafficLightsHidden = trafficLightsHidden
         self.backgroundBlurEnabled = backgroundBlurEnabled
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case url
+        case iconPath
+        case cssFilePath
+        case titlebarStyle
+        case trafficLightsHidden
+        case backgroundBlurEnabled
+        case createdAt
+        case updatedAt
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        url = try container.decode(String.self, forKey: .url)
+        iconPath = try container.decode(String.self, forKey: .iconPath)
+        cssFilePath = try container.decode(String.self, forKey: .cssFilePath)
+        titlebarStyle = try container.decode(TitlebarStyle.self, forKey: .titlebarStyle)
+        trafficLightsHidden = try container.decodeIfPresent(Bool.self, forKey: .trafficLightsHidden) ?? false
+        backgroundBlurEnabled = try container.decode(Bool.self, forKey: .backgroundBlurEnabled)
+        createdAt = try container.decode(Date.self, forKey: .createdAt)
+        updatedAt = try container.decode(Date.self, forKey: .updatedAt)
     }
 
     var displayName: String {

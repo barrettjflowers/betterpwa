@@ -19,6 +19,7 @@ class PWAExporter {
         print("=== Starting export for \(appName) ===")
         print("URL: \(config.url)")
         print("Titlebar style: \(config.titlebarStyle)")
+        print("Hide traffic lights: \(config.trafficLightsHidden)")
         print("Background blur: \(config.backgroundBlurEnabled)")
 
         guard let url = URL(string: config.url), url.scheme != nil else {
@@ -219,6 +220,12 @@ struct PWAApp {
             window.isOpaque = false
         }
 
+        if config.trafficLightsHidden {
+            window.standardWindowButton(.closeButton)?.isHidden = true
+            window.standardWindowButton(.miniaturizeButton)?.isHidden = true
+            window.standardWindowButton(.zoomButton)?.isHidden = true
+        }
+
         if config.backgroundBlurEnabled {
             let visualEffect = NSVisualEffectView(frame: window.contentView!.bounds)
             visualEffect.autoresizingMask = [.width, .height]
@@ -274,6 +281,7 @@ struct PWAApp {
 struct AppConfig: Codable {
     var url: String = ""
     var titlebarStyle: String = "No Titlebar"
+    var trafficLightsHidden: Bool = false
     var backgroundBlurEnabled: Bool = false
 }
 """
