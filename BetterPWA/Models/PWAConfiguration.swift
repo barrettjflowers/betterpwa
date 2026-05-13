@@ -13,6 +13,9 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
     var cssFilePath: String
     var titlebarStyle: TitlebarStyle
     var backgroundBlurEnabled: Bool
+    var cameraPermission: Bool
+    var microphonePermission: Bool
+    var screenCapturePermission: Bool
     var createdAt: Date
     var updatedAt: Date
 
@@ -24,6 +27,9 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
         cssFilePath: String = "",
         titlebarStyle: TitlebarStyle = .noTitlebar,
         backgroundBlurEnabled: Bool = false,
+        cameraPermission: Bool = false,
+        microphonePermission: Bool = false,
+        screenCapturePermission: Bool = false,
         createdAt: Date = Date(),
         updatedAt: Date = Date()
     ) {
@@ -34,6 +40,9 @@ struct PWAConfiguration: Codable, Identifiable, Equatable {
         self.cssFilePath = cssFilePath
         self.titlebarStyle = titlebarStyle
         self.backgroundBlurEnabled = backgroundBlurEnabled
+        self.cameraPermission = cameraPermission
+        self.microphonePermission = microphonePermission
+        self.screenCapturePermission = screenCapturePermission
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }

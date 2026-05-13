@@ -15,6 +15,8 @@ struct ConfigurationView: View {
                 Divider()
                 WindowPropertiesSection(config: $config)
                 Divider()
+                PermissionsSection(config: $config)
+                Divider()
                 CSSInputSection(config: $config)
                 Divider()
                 ExportSection(config: config)

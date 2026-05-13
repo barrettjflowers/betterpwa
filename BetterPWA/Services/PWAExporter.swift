@@ -71,6 +71,16 @@ class PWAExporter {
             "NSHighResolutionCapable": true
         ]
 
+        if config.cameraPermission {
+            bundleInfo["NSCameraUsageDescription"] = "\(appName) needs camera access for video calls."
+        }
+        if config.microphonePermission {
+            bundleInfo["NSMicrophoneUsageDescription"] = "\(appName) needs microphone access for audio calls."
+        }
+        if config.screenCapturePermission {
+            bundleInfo["NSScreenCaptureDescription"] = "\(appName) needs screen recording access for screen sharing."
+        }
+
         if !config.iconPath.isEmpty && FileManager.default.fileExists(atPath: config.iconPath) {
             let iconURL = URL(fileURLWithPath: config.iconPath)
             let destinationURL = resourcesDir.appendingPathComponent("AppIcon.icns")
@@ -277,6 +287,21 @@ struct AppConfig: Codable {
     var backgroundBlurEnabled: Bool = false
 }
 """
+
+        let delegateCode = """
+class WebViewUIDelegate: NSObject, WKUIDelegate {
+    func webView(_ webView: WKWebView, requestMediaCapturePermissionFor origin: WKSecurityOrigin, initiatedByFrame frame: WKFrameInfo, type: WKMediaCaptureType, decisionHandler: @escaping (WKPermissionDecision) -> Void) {
+        decisionHandler(.grant)
+    }
+}
+var uiDelegateHolder: WebViewUIDelegate?
+"""
+        appSource = delegateCode + "\n" + appSource
+
+        appSource = appSource.replacingOccurrences(
+            of: "webView.autoresizingMask = [.width, .height]",
+            with: "webView.autoresizingMask = [.width, .height]\n            let permDel = WebViewUIDelegate()\n            uiDelegateHolder = permDel\n            webView.uiDelegate = permDel"
+        )
 
         if !config.cssFilePath.isEmpty {
             let cssPath = config.cssFilePath

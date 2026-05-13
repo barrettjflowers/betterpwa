@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C42B0085CE2DA568C77487EB"
-               BuildableName = "betterpwa.app"
-               BlueprintName = "betterpwa"
+               BuildableName = "BetterPWA.app"
+               BlueprintName = "BetterPWA"
                ReferencedContainer = "container:BetterPWA.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C42B0085CE2DA568C77487EB"
-            BuildableName = "betterpwa.app"
-            BlueprintName = "betterpwa"
+            BuildableName = "BetterPWA.app"
+            BlueprintName = "BetterPWA"
             ReferencedContainer = "container:BetterPWA.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -56,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C42B0085CE2DA568C77487EB"
-            BuildableName = "betterpwa.app"
-            BlueprintName = "betterpwa"
+            BuildableName = "BetterPWA.app"
+            BlueprintName = "BetterPWA"
             ReferencedContainer = "container:BetterPWA.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -75,8 +75,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C42B0085CE2DA568C77487EB"
-            BuildableName = "betterpwa.app"
-            BlueprintName = "betterpwa"
+            BuildableName = "BetterPWA.app"
+            BlueprintName = "BetterPWA"
             ReferencedContainer = "container:BetterPWA.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
